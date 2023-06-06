@@ -22,15 +22,6 @@ module.exports = function ( grunt ) {
 			]
 		},
 		banana: conf.MessagesDirs,
-
-		copy: {
-			dist: {
-			  expand: true,
-			  cwd: 'node_modules/baguettebox.js/dist',
-			  src: ['baguetteBox.min.css', 'baguetteBox.min.js'],
-			  dest: 'resources/ext.baguetteBox'
-			}
-		  }
 	} );
 
 	grunt.loadNpmTasks("grunt-contrib-copy");
