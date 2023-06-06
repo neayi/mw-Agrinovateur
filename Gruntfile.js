@@ -28,6 +28,5 @@ module.exports = function ( grunt ) {
 
 	grunt.registerTask( 'test', [ 'eslint', 'stylelint', 'banana' ] );
 	grunt.registerTask( 'default', 'test' );
-	grunt.registerTask( 'installBaguette', ['copy'] );
 };
 
