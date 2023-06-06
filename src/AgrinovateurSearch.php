@@ -17,14 +17,14 @@
  * @file
  */
 
-namespace MediaWiki\Extension\Piwigo;
+namespace MediaWiki\Extension\Agrinovateur;
 
 use ApiBase;
 use ApiMain;
 use Wikimedia\ParamValidator\ParamValidator;
 use MediaWiki\MediaWikiServices;
 
-class PiwigoSearch extends ApiBase {
+class AgrinovateurSearch extends ApiBase {
 
 	/**
 	 * @param ApiMain $main main module
@@ -48,37 +48,37 @@ class PiwigoSearch extends ApiBase {
 		$site = $params['site'];
 
 		if (empty($site))
-			$piwigoRootURL = $GLOBALS['wgPiwigoURL'];
+			$agrinovateurRootURL = $GLOBALS['wgAgrinovateurURL'];
 		else
-			$piwigoRootURL = $site;
+			$agrinovateurRootURL = $site;
 
-		$piwigoWSURL = $piwigoRootURL . "/ws.php?format=json";
+		$agrinovateurWSURL = $agrinovateurRootURL . "/ws.php?format=json";
 
 		if (!empty($search))
 		{
-			$piwigoWSURL = $piwigoWSURL . "&method=pwg.images.search&query=" . $search;
+			$agrinovateurWSURL = $agrinovateurWSURL . "&method=pwg.images.search&query=" . $search;
 		}
 		else if (!empty($tags))
 		{
-			$piwigoWSURL = $piwigoWSURL . "&method=pwg.tags.getImages&tag_id=" . $tags;
+			$agrinovateurWSURL = $agrinovateurWSURL . "&method=pwg.tags.getImages&tag_id=" . $tags;
 		}
 		else if (!empty($tags_multiple))
 		{
 			$parts = explode(',', $tags_multiple);
-			$piwigoWSURL = $piwigoWSURL . "&method=pwg.tags.getImages&tag_id[]=" . implode("&tag_id[]=", $parts);
+			$agrinovateurWSURL = $agrinovateurWSURL . "&method=pwg.tags.getImages&tag_id[]=" . implode("&tag_id[]=", $parts);
 		}
 		else if (!empty($category))
 		{
-			$piwigoWSURL = $piwigoWSURL . "&method=pwg.categories.getImages&cat_id=" . $category;
+			$agrinovateurWSURL = $agrinovateurWSURL . "&method=pwg.categories.getImages&cat_id=" . $category;
 		}
 
 		if ($count > 0)
-			$piwigoWSURL = $piwigoWSURL . "&per_page=" . $count;
+			$agrinovateurWSURL = $agrinovateurWSURL . "&per_page=" . $count;
 
-		$r['ws_url'] = $piwigoWSURL;
+		$r['ws_url'] = $agrinovateurWSURL;
 
 		try {
-			$r['images'] = $this->invokeWS($piwigoWSURL);
+			$r['images'] = $this->invokeWS($agrinovateurWSURL);
 		} catch (\Exception $e) {
 			$r['error'] = $e->getMessage();
 		}
@@ -90,18 +90,18 @@ class PiwigoSearch extends ApiBase {
 	}
 
 	/**
-	 * Get the images from piwigo. This will retry up to 3 times, and cache the results for 55h
+	 * Get the images from agrinovateur. This will retry up to 3 times, and cache the results for 55h
 	 */
-	private function invokeWS($piwigoWSURL, $retry = 0)
+	private function invokeWS($agrinovateurWSURL, $retry = 0)
 	{
 		$cache = MediaWikiServices::getInstance()->getMainObjectStash();
-		$cacheKey = $cache->makeKey( 'piwigo-ext', $piwigoWSURL );
+		$cacheKey = $cache->makeKey( 'agrinovateur-ext', $agrinovateurWSURL );
 		$images = $cache->get( $cacheKey );
 
 		if (!empty($images))
 			return $images;
 
-		$ch = curl_init($piwigoWSURL);
+		$ch = curl_init($agrinovateurWSURL);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
@@ -124,7 +124,7 @@ class PiwigoSearch extends ApiBase {
 		if (curl_errno($ch) || empty($result['result']['images']))
 		{
 			if ($retry < 3)
-				return $this->invokeWS($piwigoWSURL, $retry++);
+				return $this->invokeWS($agrinovateurWSURL, $retry++);
 
 			throw new \Exception(curl_error($ch));
 		}

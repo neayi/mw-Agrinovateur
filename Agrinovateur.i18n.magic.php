@@ -9,7 +9,7 @@ $magicWords = [];
 
 /** English (English) */
 $magicWords['en'] = [
-	'piwigo' => [ 0, 'piwigo' ]
+	'agrinovateur' => [ 0, 'agrinovateur' ]
 ];
 
 

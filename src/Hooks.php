@@ -17,7 +17,7 @@
  * @file
  */
 
-namespace MediaWiki\Extension\Piwigo;
+namespace MediaWiki\Extension\Agrinovateur;
 
 use FormatJson;
 use Parser;
@@ -27,7 +27,7 @@ class Hooks implements
 	\MediaWiki\Hook\ParserFirstCallInitHook
 {
 	/**
-	 * Register parser hooks to add the piwigo keyword
+	 * Register parser hooks to add the agrinovateur keyword
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserFirstCallInit
 	 * @see https://www.mediawiki.org/wiki/Manual:Parser_functions
@@ -37,58 +37,23 @@ class Hooks implements
 	public function onParserFirstCallInit( $parser ) {
 
 		// Add the following to a wiki page to see how it works:
-		// <piwigo tags=1 count=5 /> or <piwigo category=1 count=5 />
-		$parser->setHook( 'piwigo', [ self::class, 'parserKeywordPiwigo' ] );
-
-		// Add the following to a wiki page to see how it works:
 		// {{#piwigo: tags=1 | tags=2 | count = 10 }}
-		$parser->setFunctionHook( 'piwigo', [ self::class, 'parserFunctionPiwigo' ] );
+		$parser->setFunctionHook( 'agrinovateur', [ self::class, 'parserFunctionAgrinovateur' ] );
 
 		return true;
 	}
 
 	/**
-	 * Implements tag function, <piwigo/>, which enables
-	 * the piwigo gallery on a page.
-	 *
-	 * @param string $input input between the tags (ignored)
-	 * @param array $args tag arguments
-	 * @param Parser $parser the parser
-	 * @param PPFrame $frame the parent frame
-	 * @return string to replace tag with
-	 */
-	public static function parserKeywordPiwigo( $input, array $args, Parser $parser, PPFrame $frame ) {
-		$parser->getOutput()->addModules( 'ext.piwigo' );
-		$parser->getOutput()->addModules( 'ext.baguetteBox' );
-
-		if (empty($GLOBALS['wgPiwigoURL']))
-		{
-			return '<p>Please add <code>$wgPiwigoURL</code> to your LocalSettings.php</p>';
-		}
-
-		$piwigoParams = [];
-		$piwigoParams[ 'wgPiwigoURL' ] = $GLOBALS['wgPiwigoURL'];
-        $piwigoParams[ 'wgPiwigoGalleryLayout' ] = $GLOBALS['wgPiwigoGalleryLayout'] ?? 'fluid';
-
-		$parser->getOutput()->addJsConfigVars( 'Piwigo', $piwigoParams );
-
-		$ret = self::getGalleryTag($args);
-
-		return $ret;
-	}
-
-	/**
-	 * Parser function handler for {{#piwigo: .. | .. }}
+	 * Parser function handler for {{#agrinovateur: .. | .. }}
 	 *
 	 * @param Parser $parser
 	 * @param string $value
 	 * @param string ...$args
 	 * @return string HTML to insert in the page.
 	 */
-	public static function parserFunctionPiwigo( Parser $parser, string $value, ...$args ) {
+	public static function parserFunctionAgrinovateur( Parser $parser, string $value, ...$args ) {
 
-		$parser->getOutput()->addModules( 'ext.piwigo' );
-		$parser->getOutput()->addModules( 'ext.baguetteBox' );
+		$parser->getOutput()->addModules( 'ext.agrinovateur' );
 
 		$args[] = $value;
 
@@ -122,16 +87,16 @@ class Hooks implements
 			}
 		}
 
-		if (empty($GLOBALS['wgPiwigoURL']))
+		if (empty($GLOBALS['wgAgrinovateurURL']))
 		{
-			return '<p>Please add <code>$wgPiwigoURL</code> to your LocalSettings.php</p>';
+			return '<p>Please add <code>$wgAgrinovateurURL</code> to your LocalSettings.php</p>';
 		}
 
-		$piwigoParams = [];
-		$piwigoParams[ 'wgPiwigoURL' ] = $GLOBALS['wgPiwigoURL'];
-		$piwigoParams[ 'wgPiwigoGalleryLayout' ] = $GLOBALS['wgPiwigoGalleryLayout'] ?? 'fluid';
+		$agrinovateurParams = [];
+		$agrinovateurParams[ 'wgAgrinovateurURL' ] = $GLOBALS['wgAgrinovateurURL'];
+		$agrinovateurParams[ 'wgAgrinovateurGalleryLayout' ] = $GLOBALS['wgAgrinovateurGalleryLayout'] ?? 'fluid';
 
-		$parser->getOutput()->addJsConfigVars( 'Piwigo', $piwigoParams );
+		$parser->getOutput()->addJsConfigVars( 'Agrinovateur', $agrinovateurParams );
 
 		$ret = self::getGalleryTag($parameters);
 
@@ -162,6 +127,6 @@ class Hooks implements
 				$data[] = 'data-'.$k.'="'.htmlspecialchars($v).'"';
 		}
 
-		return '<div class="showPiwigo tz-gallery" '.implode(' ', $data).'></div>';
+		return '<div class="showAgrinovateur tz-gallery" '.implode(' ', $data).'></div>';
 	}
 }
