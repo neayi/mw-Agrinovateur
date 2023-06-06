@@ -1,5 +1,5 @@
 {
-	"name": "Piwigo",
+	"name": "Agrinovateur",
 	"private": true,
 	"scripts": {
 		"test": "grunt test"
@@ -15,8 +15,5 @@
 	},
 	"eslintIgnore": [
 		"vendor/**"
-	],
-	"dependencies": {
-		"baguettebox.js": "^1.11.1"
-	}
+	]
 }
