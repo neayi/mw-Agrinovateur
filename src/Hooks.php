@@ -87,19 +87,20 @@ class Hooks implements
 			}
 		}
 
-		if (empty($GLOBALS['wgAgrinovateurURL']))
+		if (empty($GLOBALS['wgAgrinovateurToken']))
 		{
-			return '<p>Please add <code>$wgAgrinovateurURL</code> to your LocalSettings.php</p>';
+			return '<p>Please add <code>$wgAgrinovateurToken</code> to your LocalSettings.php</p>';
 		}
 
 		$agrinovateurParams = [];
-		$agrinovateurParams[ 'wgAgrinovateurURL' ] = $GLOBALS['wgAgrinovateurURL'];
-		$agrinovateurParams[ 'wgAgrinovateurGalleryLayout' ] = $GLOBALS['wgAgrinovateurGalleryLayout'] ?? 'fluid';
+		//$agrinovateurParams[ 'wgAgrinovateurURL' ] = $GLOBALS['wgAgrinovateurURL'];
+		$agrinovateurParams[ 'wgAgrinovateurToken' ] = $GLOBALS['wgAgrinovateurToken'];
+		//$agrinovateurParams[ 'wgAgrinovateurGalleryLayout' ] = $GLOBALS['wgAgrinovateurGalleryLayout'] ?? 'fluid';
 
 		$parser->getOutput()->addJsConfigVars( 'Agrinovateur', $agrinovateurParams );
 
 		$ret = self::getGalleryTag($parameters);
-		$ret.="Hello Camille";
+		//$ret.="Hello Camille";
 		return $ret;
 	}
 

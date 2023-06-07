@@ -87,7 +87,7 @@
                         <a  type="button" class="btn btn-primary btn-sm text-white" href="${agrinovateurURL}" target="_blank">Voir la galerie</a>
                         </div><br style="clear:both"/>`).insertAfter(agrinovateurDiv);
 
-                baguetteBox.run('.showAgrinovateur');
+                //baguetteBox.run('.showAgrinovateur');
             } );
         }
 	};
