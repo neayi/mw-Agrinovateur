@@ -37,7 +37,7 @@
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"Agrinovateur": "Agrinovateur.i18n.magic.php"
+		"AgrinovateurMagic": "Agrinovateur.i18n.magic.php"
 	},
 	"ResourceModules": {
 		"ext.agrinovateur": {

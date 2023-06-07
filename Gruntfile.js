@@ -21,7 +21,7 @@ module.exports = function ( grunt ) {
 				'!vendor/**'
 			]
 		},
-		banana: conf.MessagesDirs,
+		banana: conf.MessagesDirs
 	} );
 
 	grunt.loadNpmTasks("grunt-contrib-copy");
