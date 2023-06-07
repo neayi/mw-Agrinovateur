@@ -15,13 +15,9 @@
 		"MediaWiki\\Extension\\Agrinovateur\\": "src/"
 	},
 	"config": {
-		"AgrinovateurURL": {
-			"description": "The URL of the Agrinovateur setup to take images from",
+		"wgAgrinovateurToken": {
+			"description": "The token used to access the Agrinovateur API",
 			"value": null
-		},
-		"AgrinovateurGalleryLayout": {
-			"description": "One of the four: fluid (default), grid, thumbnails, clean",
-			"value": "fluid"
 		}
 	},
 	"HookHandlers": {

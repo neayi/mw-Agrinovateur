@@ -37,7 +37,7 @@ class Hooks implements
 	public function onParserFirstCallInit( $parser ) {
 
 		// Add the following to a wiki page to see how it works:
-		// {{#piwigo: tags=1 | tags=2 | count = 10 }}
+		// {{#agrinovateur: tags=1 | tags=2 | count = 10 }}
 		$parser->setFunctionHook( 'agrinovateur', [ self::class, 'parserFunctionAgrinovateur' ] );
 
 		return true;
@@ -99,7 +99,7 @@ class Hooks implements
 		$parser->getOutput()->addJsConfigVars( 'Agrinovateur', $agrinovateurParams );
 
 		$ret = self::getGalleryTag($parameters);
-
+		$ret.="Hello Camille";
 		return $ret;
 	}
 
