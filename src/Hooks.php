@@ -93,20 +93,18 @@ class Hooks implements
 		}
 
 		$agrinovateurParams = [];
-		//$agrinovateurParams[ 'wgAgrinovateurURL' ] = $GLOBALS['wgAgrinovateurURL'];
 		$agrinovateurParams[ 'wgAgrinovateurToken' ] = $GLOBALS['wgAgrinovateurToken'];
-		//$agrinovateurParams[ 'wgAgrinovateurGalleryLayout' ] = $GLOBALS['wgAgrinovateurGalleryLayout'] ?? 'fluid';
 
 		$parser->getOutput()->addJsConfigVars( 'Agrinovateur', $agrinovateurParams );
 
-		$ret = self::getGalleryTag($parameters);
-		//$ret.="Hello Camille";
+		$ret = self::getDivTag($parameters);
 		return $ret;
 	}
 
-	private static function getGalleryTag($parameters)
+	private static function getDivTag($parameters)
 	{
 		// Add some synonymes for robustness:
+		/*
 		if (!empty($parameters['images']))
 			$parameters['count'] = $parameters['images'];
 		unset($parameters['images']);
@@ -118,6 +116,7 @@ class Hooks implements
 		if (!empty($parameters['album']))
 			$parameters['category'] = $parameters['album'];
 		unset($parameters['album']);
+		*/
 
 		$data = array();
 		foreach ($parameters as $k => $v)
@@ -128,6 +127,6 @@ class Hooks implements
 				$data[] = 'data-'.$k.'="'.htmlspecialchars($v).'"';
 		}
 
-		return '<div class="showAgrinovateur tz-gallery" '.implode(' ', $data).'></div>';
+		return '<div class="showAgrinovateur" '.implode(' ', $data).'></div>';
 	}
 }

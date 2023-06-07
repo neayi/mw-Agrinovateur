@@ -38,27 +38,27 @@ class AgrinovateurSearch extends ApiBase {
 	 * execute the API request
 	 */
 	public function execute() {
+
 		$params = $this->extractRequestParams();
 
 		$tags = $params['tags'];
 		$tags_multiple = $params['tags_multiple'];
-		$category = $params['category'];
 		$search = $this->mb_rawurlencode($params['search']);
 		$count = $params['count'];
 		$site = $params['site'];
-
+		$category = $params['category'];
+		
+		$agrinovateurWSURL = "http://api.agrinovateur.fr/api/subcategories/" . $category . "/products";
+		/*
 		if (empty($site))
 			$agrinovateurRootURL = $GLOBALS['wgAgrinovateurURL'];
-		else
-			$agrinovateurRootURL = $site;
 
-		$agrinovateurWSURL = $agrinovateurRootURL . "/ws.php?format=json";
-
+		
 		if (!empty($search))
 		{
 			$agrinovateurWSURL = $agrinovateurWSURL . "&method=pwg.images.search&query=" . $search;
 		}
-		else if (!empty($tags))
+		if (!empty($tags))
 		{
 			$agrinovateurWSURL = $agrinovateurWSURL . "&method=pwg.tags.getImages&tag_id=" . $tags;
 		}
@@ -75,6 +75,8 @@ class AgrinovateurSearch extends ApiBase {
 		if ($count > 0)
 			$agrinovateurWSURL = $agrinovateurWSURL . "&per_page=" . $count;
 
+		*/
+
 		$r['ws_url'] = $agrinovateurWSURL;
 
 		try {
@@ -83,7 +85,7 @@ class AgrinovateurSearch extends ApiBase {
 			$r['error'] = $e->getMessage();
 		}
 
-		$r['see_more'] = ($count > 0 && $count == count($r['images'])) ? 'true' : 'false';
+		//$r['see_more'] = ($count > 0 && $count == count($r['images'])) ? 'true' : 'false';
 
         $apiResult = $this->getResult();
         $apiResult->addValue( null, $this->getModuleName(), $r );
@@ -103,6 +105,7 @@ class AgrinovateurSearch extends ApiBase {
 
 		$ch = curl_init($agrinovateurWSURL);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization= Bearer ' . $GLOBALS['wgAgrinovateurToken']));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 		// The number of seconds to wait while trying to connect.

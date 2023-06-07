@@ -4,7 +4,7 @@ This is a mediawiki extension that displays a gallery of images extracted from a
 
 ## What this does
 
-This extension adds a ```<agrinovateur />``` keyword and a ```{{#agrinovateur}}``` parser function that show a gallery in a page. The keyword can contain the same kind of parameters as Agrinovateur's URL (category, tags, ...):
+This extension adds a ```{{#agrinovateur}}``` parser function that show a gallery in a page. The keyword can contain the same kind of parameters as Agrinovateur's URL (category, tags, ...):
 
 ### Search parameter ###
 You can search for photos, including with a complex search, using the search parameter. See [here](https://fr.agrinovateur.org/doc/doku.php?id=utiliser:utilisation:fonctionnalites:recherche_rapide) for the syntax.
@@ -12,9 +12,9 @@ You can search for photos, including with a complex search, using the search par
 That would give for example: ```{{#agrinovateur:search = tag:1-flowers red}}``` 
 
 ### Tags parameter ###
-You can select all photos for a given tag by using: ```{{#agrinovateur:tags=1-tagname}}``` or ```<agrinovateur tags="1-tagname"/>```  or ```<agrinovateur tags="1"/>``` (only the tag id is relevant).
+You can select all photos for a given tag by using: ```{{#agrinovateur:tags=1-tagname}}```.
 
-It is also possible to target more than one tag with the parser function: ```{{#agrinovateur: tags=3 | tags=4 | count=5 }}``` (not that for that you'll need to use the parser function and not the keyword - ie. ```<agrinovateur  tags=3 | tags=4 | count=5>``` will only show images from tag 4)
+It is also possible to target more than one tag with the parser function: ```{{#agrinovateur: tags=3 | tags=4 | count=5 }}```
 
 If the ```tags``` parameter is set, the ```category``` is ignored.
 
@@ -22,7 +22,7 @@ If the ```tags``` parameter is set, the ```category``` is ignored.
 The category parameter is used to select photos from an album. You cannot select both an album and a tag (both are mutually exclusive): ```{{#agrinovateur: category = 5}}```
 
 ### Count parameter ###
-You can use the ```count``` parameter to limit the number of results: ```{{#agrinovateur: category = 5 | count = 10}}```  or ```<agrinovateur tags="1" count = 4/>```
+You can use the ```count``` parameter to limit the number of results: ```{{#agrinovateur: category = 5 | count = 10}}```
 
 ### Site parameter ###
 You may want to look up photos from another setup of Agrinovateur than the one defined by default in LocalSettings.php. In such case, simply add the site parameter:
@@ -39,7 +39,6 @@ You will need to store the extension in ```extensions/Agrinovateur```, then add 
 
 ```
 wfLoadExtension( 'Agrinovateur' );
-$wgAgrinovateurURL = 'https://somegallery.agrinovateur.fr';
-$wgAgrinovateurGalleryLayout = 'fluid'; // one of the four: fluid (default), grid, thumbnails, clean
+$wgAgrinovateurToken = getenv('AGRINOVATEUR_TOKEN', true);
 ```
 

@@ -29,8 +29,6 @@
             var agrinovateurRootURL = '';
             if (site !== undefined)
                 agrinovateurRootURL = site;
-            else
-                agrinovateurRootURL = mw.config.get('Agrinovateur').wgAgrinovateurURL;
 
             var agrinovateurURL = agrinovateurRootURL + '/?/';
 
