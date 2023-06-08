@@ -12,59 +12,46 @@
             $('.showAgrinovateur').each(function () {
                 var agrinovateurDiv = $(this);
 
-                // NB : Tags will take over category (album)
                 var category = agrinovateurDiv.data( "category" );
+                var categorySlug = agrinovateurDiv.data( "categoryslug" );
 
-                self.getProducts(category, agrinovateurDiv);
+                self.getProducts(category, categorySlug, agrinovateurDiv);
             });
 
 		},
 
-        getProducts: function (category, agrinovateurDiv) {
+        getProducts: function (category, categorySlug, agrinovateurDiv) {
 
-            var agrinovateurRootURL = '';
+            var agrinovateurURL = "https://www.agrinovateur.fr/";
 
-            var agrinovateurURL = agrinovateurRootURL;
-            
-            if (category !== undefined)
-            {
-                agrinovateurURL = agrinovateurURL + 'subcategories/' + category;
-            }
+            if (categorySlug !== undefined)
+                agrinovateurURL = "https://www.agrinovateur.fr/outils?recordId=" + categorySlug;
 
             var api = new mw.Api();
             api.post( {
-                'action': 'agrinovateursearch',
+                'action': 'agrinovateurproducts',
                 'category': category
             } )
             .done( function ( data ) {
-                //console.log("agrinovateursearch:");
+                //console.log("agrinovateurproducts:");
                 //console.log(data);
 
                 var rowDiv = $('<div>').attr('class', 'row');
-                data.agrinovateursearch.images.forEach(item => {
+                data.agrinovateurproducts.products.data.forEach(item => {
 
                     rowDiv.append($(`<div class="col-sm-12 col-md-4">
-                        <a class="lightbox" href="${item.large}" data-caption="${item.caption}">
-                            <img src="${item.thumb}" alt="${item.caption}">
+                        <a href="${item.url}" data-caption="${item.name}" target="_blank">
+                            <img src="${item.picture}" alt="${item.name}">
                         </a>
                     </div>`));
                 });
 
                 agrinovateurDiv.append(rowDiv);
 
-                /*
-                // Add a button with the URL to the gallery:
-                if (data.agrinovateursearch.see_more == 'true')
-                    $(`<div class="text-right">
-                            <a  type="button" class="btn btn-primary btn-sm text-white" href="${agrinovateurURL}" target="_blank">Voir plus de photos</a>
-                        </div><br style="clear:both"/>`).insertAfter(agrinovateurDiv);
-                else
-                    $(`<div class="text-right">
-                        <a  type="button" class="btn btn-primary btn-sm text-white" href="${agrinovateurURL}" target="_blank">Voir la galerie</a>
-                        </div><br style="clear:both"/>`).insertAfter(agrinovateurDiv);
-
-                */
-                //baguetteBox.run('.showAgrinovateur');
+                // Add a button with the URL to Agrinovateur:
+                $(`<div class="text-right">
+                    <a  type="button" class="btn btn-primary btn-sm text-white" href="${agrinovateurURL}" target="_blank">Voir plus</a>
+                    </div><br style="clear:both"/>`).insertAfter(agrinovateurDiv);
             } );
         }
 	};

@@ -55,78 +55,20 @@ class Hooks implements
 
 		$parser->getOutput()->addModules( 'ext.agrinovateur' );
 
-		$args[] = $value;
-
-		// Format the parameters in a nice array
-		$parameters = array();
-		foreach ($args as $argpair)
-		{
-			$parts = array();
-			if (preg_match('@^([^=]+)=?(.*)$@', $argpair, $parts))
-			{
-				$k = strtolower(trim($parts[1]));
-				if ($k != 'search')
-					$value = trim(preg_replace('@-.*$@', '', $parts[2]));
-				else
-					$value = $parts[2];
-
-				if (isset($parameters[$k]))
-				{
-					if (!is_array($parameters[$k]))
-					{
-						$v = $parameters[$k];
-						unset($parameters[$k]);
-
-						$parameters[$k][] = $v;
-					}
-
-					$parameters[$k][] = $value;
-				}
-				else
-					$parameters[$k] = $value;
-			}
-		}
-
 		if (empty($GLOBALS['wgAgrinovateurToken']))
 		{
 			return '<p>Please add <code>$wgAgrinovateurToken</code> to your LocalSettings.php</p>';
 		}
 
-		$agrinovateurParams = [];
-		$agrinovateurParams[ 'wgAgrinovateurToken' ] = $GLOBALS['wgAgrinovateurToken'];
-
-		$parser->getOutput()->addJsConfigVars( 'Agrinovateur', $agrinovateurParams );
-
-		$ret = self::getDivTag($parameters);
-		return $ret;
-	}
-
-	private static function getDivTag($parameters)
-	{
-		// Add some synonymes for robustness:
-		/*
-		if (!empty($parameters['images']))
-			$parameters['count'] = $parameters['images'];
-		unset($parameters['images']);
-
-		if (!empty($parameters['tag']))
-			$parameters['tags'] = $parameters['tag'];
-		unset($parameters['tag']);
-
-		if (!empty($parameters['album']))
-			$parameters['category'] = $parameters['album'];
-		unset($parameters['album']);
-		*/
-
-		$data = array();
-		foreach ($parameters as $k => $v)
+		if (empty($args[0]) || empty($value))
 		{
-			if (is_array($v))
-				$data[] = 'data-'.$k.'_multiple="'.htmlspecialchars(implode(',', $v)).'"';
-			else
-				$data[] = 'data-'.$k.'="'.htmlspecialchars($v).'"';
+			return '<p>Please enter the category id and slud: {{#agrinovateurs:26|recsSaN8fE0mLrIT9}}</p>';
 		}
 
-		return '<div class="showAgrinovateur" '.implode(' ', $data).'></div>';
+		$category = trim($value);
+		$categorySlug = trim($args[0]);
+
+		$ret = '<div class="showAgrinovateur" data-category="'.htmlspecialchars($category).'" data-categorySlug="'.htmlspecialchars($categorySlug).'"></div>';
+		return $ret;
 	}
 }

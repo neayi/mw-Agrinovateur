@@ -29,7 +29,7 @@
 		"ParserFirstCallInit": "AgrinovateurHooks"
 	},
 	"APIModules": {
-		"agrinovateursearch": "MediaWiki\\Extension\\Agrinovateur\\AgrinovateurSearch"
+		"agrinovateurproducts": "MediaWiki\\Extension\\Agrinovateur\\AgrinovateurProducts"
 	},
 	"MessagesDirs": {
 		"Agrinovateur": [

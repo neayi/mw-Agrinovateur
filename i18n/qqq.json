@@ -1,12 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Your Name"
+			"Bertrand Gorge"
 		]
 	},
 	"Agrinovateur-desc": "{{desc|name=Agrinovateur|url=https://www.mediawiki.org/wiki/Extension:Agrinovateur}}",
-	"apihelp-agrinovateursearch-summary": "This API serves as a proxy to a agrinovateur search web service<br>See [https://fr.agrinovateur.org/doc/doku.php?id=utiliser:utilisation:fonctionnalites:recherche_rapide#syntaxe_pour_recherches_specifiques Piwogo's help] for more information",
-	"apihelp-agrinovateursearch-param-search": "Search query",
-	"apihelp-agrinovateursearch-param-count": "Count (nb of images returned)",
-	"apihelp-agrinovateursearch-example": "Search 20 images on the word clouds with the tag some tag."
+	"apihelp-agrinovateurproducts-summary": "This API serves as a proxy to a agrinovateur web services",
+	"apihelp-agrinovateurproducts-param-category": "The category of products to lookup",
+	"apihelp-agrinovateurproducts-example": "Search products in the category 26 (bineuse)."
 }
