@@ -38,7 +38,7 @@
 
                 var rowDiv = $('<div>').attr('class', 'row mx-1');
 
-                data.agrinovateurproducts.products.data.forEach(item => {
+                data.agrinovateurproducts.products.data.slice(-5).forEach(item => {
                     
                     rowDiv.append($(`<div class="col-xl-4 mb-lg-0 mb-3">
 			            <div class="very-small-card card mb-3" style="background: #F2F3F6;">
