@@ -1,23 +1,23 @@
-.tz-gallery {
+.data-category {
     padding: 40px;
 }
 
 /* Override bootstrap column paddings */
-.tz-gallery .row > div {
+.data-category .row > div {
     padding: 2px;
 }
 
-.tz-gallery .row a {
+.data-category .row a {
     display: inline-block;
 }
 
-.tz-gallery .lightbox img {
+.data-category .lightbox img {
     width: 100%;
     border-radius: 0;
     position: relative;
 }
 
-.tz-gallery .lightbox:before {
+.data-category .lightbox:before {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -33,7 +33,7 @@
     transition: 0.4s;
 }
 
-.tz-gallery .lightbox:after {
+.data-category .lightbox:after {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,8 +45,8 @@
     transition: 0.4s;
 }
 
-.tz-gallery .lightbox:hover:after,
-.tz-gallery .lightbox:hover:before {
+.data-category .lightbox:hover:after,
+.data-category .lightbox:hover:before {
     opacity: 1;
 }
 

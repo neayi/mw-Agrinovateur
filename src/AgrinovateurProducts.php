@@ -43,7 +43,7 @@ class AgrinovateurProducts extends ApiBase {
 
 		$category = $params['category'];
 
-		$agrinovateurWSURL = "http://api.agrinovateur.fr/api/subcategories/" . $category . "/products";
+		$agrinovateurWSURL = "https://api.commca.fr/api/subcategories/" . $category . "/products";
 
 		$r['ws_url'] = $agrinovateurWSURL;
 
@@ -66,8 +66,8 @@ class AgrinovateurProducts extends ApiBase {
 		$cacheKey = $cache->makeKey( 'agrinovateur-ext', $agrinovateurWSURL );
 		$products = $cache->get( $cacheKey );
 
-		if (!empty($products))
-			return $products;
+		//if (!empty($products))
+		//	return $products;
 
 		$ch = curl_init($agrinovateurWSURL);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));

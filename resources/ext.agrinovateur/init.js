@@ -22,10 +22,10 @@
 
         getProducts: function (category, categorySlug, agrinovateurDiv) {
 
-            var agrinovateurURL = "http://www.agrinovateur.fr/";
+            var agrinovateurURL = "https://api.commca.fr/";
 
             if (categorySlug !== undefined)
-                agrinovateurURL = "http://www.agrinovateur.fr/outils?recordId=" + categorySlug;
+                agrinovateurURL = "https://api.commca.fr/outils?recordId=" + categorySlug;
 
             var api = new mw.Api();
             api.post( {
@@ -36,19 +36,25 @@
                 //console.log("agrinovateurproducts:");
                 //console.log(data);
 
-                var rowDiv = $('<div>').attr('class', 'row');
+                var rowDiv = $('<div>').attr('class', 'row mx-1');
 
-                
-                data.agrinovateurproducts.products.data.forEach(item => { 
-                    rowDiv.append($(`<div class="col-sm-12 col-md-4">
-			            <div class="card bg-light mb-3" style="width: 18rem;">
-                            <div class="card-body">
-                        	    <a href="${item.url}" data-caption="${item.name}" target="_blank">
-                            	    <img src="${item.picture}" class="card-img-top" alt="${item.name}">
-				                </a>
-					            <p class="card-text"><a href="#" class="stretched-link"><b>${item.name} </b>${item.brand_name}</a></p>
-    					        <div class="d-flex justify-content-between align-items-center">
-                                    <div class="ratings">
+                data.agrinovateurproducts.products.data.forEach(item => {
+                    
+                    rowDiv.append($(`<div class="col-xl-4 mb-lg-0 mb-3">
+			            <div class="very-small-card card mb-3" style="background: #F2F3F6;">
+                            <div class="row no-gutters">
+                                <div class="col-md-3 image-col" style="max-height: 75px; min-height: 75px;">
+                                    <a href="${item.url}" data-caption="${item.name}" target="_blank">
+                                        <img src="${item.picture}" class="card-img-top" alt="${item.name}" data-file-width="800" data-file-height="533">
+                                    </a>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body px-2 py-1">
+                                        <p class="card-text"><a href="${item.url}" class="stretched-link"><b>${item.name} </b></a></p>
+                                        <p class="card-text">${item.brand_name}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="ratings" id="ratings_${item.id}"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -56,12 +62,18 @@
                     </div>`));
 
                     // Prise en compte des notes diverses, remplis étoiles correspondant à la note
-                    if (item.note != null) {
-                        let notation = Math.round(item.note);
+				    let notation = Math.round(item.note);
+                    if (notation != 0) {
                         jQuery(function($) {
-                            $(".ratings").append(new Array(++notation).join('<i class="fa fa-star rating-color"></i>'));
+                            var full = '<i class="fas fa-star"></i>';
+                            var empty = '<i class="far fa-star"></i>';      
+                            let html = '';
+                            for(var i = 0; i < 5; i++) {
+                                html += i < notation ? full : empty;
+                            }
+                            $("#ratings_"+ `${item.id}`).html(html);
                         });
-                    }  
+                    }
                 });
 
                 agrinovateurDiv.append(rowDiv);
