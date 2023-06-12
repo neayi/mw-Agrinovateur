@@ -36,6 +36,9 @@
                 //console.log("agrinovateurproducts:");
                 //console.log(data);
 
+                if (data.agrinovateurproducts.products.data.length == 0)
+                    return;
+
                 var rowDiv = $('<div>').attr('class', 'row');
 
                 data.agrinovateurproducts.products.data.slice(-9).forEach(item => {
@@ -78,7 +81,7 @@
 
                 // Add a button with the URL to Agrinovateur:
                 $(`<div class="text-right">
-                    <a  type="button" class="btn btn-primary btn-sm text-white" href="${agrinovateurURL}" target="_blank">Voir plus</a>
+                    <a  type="button" class="btn btn-primary btn-sm text-white" href="${agrinovateurURL}" target="_blank">Voir plus sur Agrinovateur</a>
                     </div><br style="clear:both"/>`).insertAfter(agrinovateurDiv);
             });
         }
