@@ -77,6 +77,7 @@
 
                 });
 
+                agrinovateurDiv.append($('<h2>Exemples de matériels</h2>'));
                 agrinovateurDiv.append(rowDiv);
 
                 // Add a button with the URL to Agrinovateur:
