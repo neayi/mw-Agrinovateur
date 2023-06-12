@@ -68,7 +68,7 @@ class Hooks implements
 		$category = trim($value);
 		$categorySlug = trim($args[0]);
 
-		$ret = '<div class="showAgrinovateur" data-category="'.htmlspecialchars($category).'" data-categorySlug="'.htmlspecialchars($categorySlug).'"></div>';
+		$ret = '<div class="showAgrinovateur" style="clear:both" data-category="'.htmlspecialchars($category).'" data-categorySlug="'.htmlspecialchars($categorySlug).'"></div>';
 		return $ret;
 	}
 }

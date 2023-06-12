@@ -36,12 +36,25 @@
                 //console.log("agrinovateurproducts:");
                 //console.log(data);
 
-                var rowDiv = $('<div>').attr('class', 'row mx-1');
+                var rowDiv = $('<div>').attr('class', 'row');
 
-                data.agrinovateurproducts.products.data.slice(-5).forEach(item => {
-                    
+                data.agrinovateurproducts.products.data.slice(-9).forEach(item => {
+                    var ratings = '';
+
+    			    let notation = Math.round(item.note);
+                    var full = '<i class="fas fa-star"></i>';
+                    var empty = '<i class="far fa-star"></i>';
+
+                    if (notation != 0) {
+                        for(var i = 0; i < 5; i++) {
+                            ratings += i < notation ? full : empty;
+                        }
+
+                        ratings = '<div class="ratings">' + ratings + '</div>';
+                    }
+
                     rowDiv.append($(`<div class="col-xl-4 mb-lg-0 mb-3">
-			            <div class="very-small-card card mb-3" style="background: #F2F3F6;">
+			            <div class="agrinovateur very-small-card card mb-3" style="background: #F2F3F6;">
                             <div class="row no-gutters">
                                 <div class="col-md-3 image-col" style="max-height: 75px; min-height: 75px;">
                                     <a href="${item.url}" data-caption="${item.name}" target="_blank">
@@ -50,30 +63,15 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="card-body px-2 py-1">
-                                        <p class="card-text"><a href="${item.url}" class="stretched-link"><b>${item.name} </b></a></p>
-                                        <p class="card-text">${item.brand_name}</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="ratings" id="ratings_${item.id}"></div>
-                                        </div>
+                                        <p class="card-text brand">${item.brand_name}</p>
+                                        <p class="card-text model"><a href="${item.url}" class="stretched-link" target="_blank"><b>${item.name} </b></a></p>
+                                        ${ratings}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>`));
 
-                    // Prise en compte des notes diverses, remplis étoiles correspondant à la note
-				    let notation = Math.round(item.note);
-                    if (notation != 0) {
-                        jQuery(function($) {
-                            var full = '<i class="fas fa-star"></i>';
-                            var empty = '<i class="far fa-star"></i>';      
-                            let html = '';
-                            for(var i = 0; i < 5; i++) {
-                                html += i < notation ? full : empty;
-                            }
-                            $("#ratings_"+ `${item.id}`).html(html);
-                        });
-                    }
                 });
 
                 agrinovateurDiv.append(rowDiv);
