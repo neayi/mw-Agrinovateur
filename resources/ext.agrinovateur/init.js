@@ -57,12 +57,12 @@
                     rowDiv.append($(`<div class="col-xl-4 mb-lg-0 mb-3">
 			            <div class="agrinovateur very-small-card card mb-3" style="background: #F2F3F6;">
                             <div class="row no-gutters">
-                                <div class="col-md-3 image-col" style="max-height: 75px; min-height: 75px;">
+                                <div class="col-3 image-col" style="max-height: 75px; min-height: 75px;">
                                     <a href="${item.url}" data-caption="${item.name}" target="_blank">
                                         <img src="${item.picture}" class="card-img-top" alt="${item.name}" data-file-width="800" data-file-height="533">
                                     </a>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-9">
                                     <div class="card-body px-2 py-1">
                                         <p class="card-text brand">${item.brand_name}</p>
                                         <p class="card-text model"><a href="${item.url}" class="stretched-link" target="_blank"><b>${item.name} </b></a></p>
