@@ -22,10 +22,10 @@
 
         getProducts: function (category, categorySlug, agrinovateurDiv) {
 
-            var agrinovateurURL = "https://api.commca.fr/";
+            var agrinovateurURL = "https://www.agrinovateur.fr/";
 
             if (categorySlug !== undefined)
-                agrinovateurURL = "https://api.commca.fr/outils?recordId=" + categorySlug;
+                agrinovateurURL = "https://www.agrinovateur.fr/outils?recordId=" + categorySlug;
 
             var api = new mw.Api();
             api.post( {
@@ -36,7 +36,10 @@
                 //console.log("agrinovateurproducts:");
                 //console.log(data);
 
-                if (data.agrinovateurproducts.products.data.length == 0)
+                if (!data.agrinovateurproducts ||
+                    !data.agrinovateurproducts.products ||
+                    !data.agrinovateurproducts.products.data ||
+                    data.agrinovateurproducts.products.data.length == 0)
                     return;
 
                 var rowDiv = $('<div>').attr('class', 'row');
