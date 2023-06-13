@@ -22,11 +22,6 @@
 
         getProducts: function (category, categorySlug, agrinovateurDiv) {
 
-            var agrinovateurURL = "https://www.agrinovateur.fr/";
-
-            if (categorySlug !== undefined)
-                agrinovateurURL = "https://www.agrinovateur.fr/outils?recordId=" + categorySlug;
-
             var api = new mw.Api();
             api.post( {
                 'action': 'agrinovateurproducts',
@@ -84,6 +79,12 @@
                 agrinovateurDiv.append(rowDiv);
 
                 // Add a button with the URL to Agrinovateur:
+
+                var agrinovateurURL = "https://www.agrinovateur.fr/";
+
+                if (categorySlug !== undefined)
+                    agrinovateurURL = "https://www.agrinovateur.fr/outils?recordId=" + categorySlug;
+
                 $(`<div class="text-right">
                     <a  type="button" class="btn btn-primary btn-sm text-white" href="${agrinovateurURL}" target="_blank">Voir plus sur Agrinovateur</a>
                     </div><br style="clear:both"/>`).insertAfter(agrinovateurDiv);
