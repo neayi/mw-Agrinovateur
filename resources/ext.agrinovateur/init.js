@@ -57,7 +57,7 @@
                     rowDiv.append($(`<div class="col-xl-4 mb-lg-0 mb-3">
 			            <div class="agrinovateur very-small-card card mb-3" style="background: #F2F3F6;">
                             <div class="row no-gutters">
-                                <div class="col-3 image-col" style="max-height: 75px; min-height: 75px;">
+                                <div class="col-3 image-col" style="min-height: 75px;">
                                     <a href="${item.url}" data-caption="${item.name}" target="_blank">
                                         <img src="${item.picture}" class="card-img-top" alt="${item.name}" data-file-width="800" data-file-height="533">
                                     </a>
