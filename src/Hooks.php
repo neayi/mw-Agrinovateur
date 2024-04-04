@@ -53,7 +53,7 @@ class Hooks implements
 	 */
 	public static function parserFunctionAgrinovateur( Parser $parser, string $value, ...$args ) {
 
-		$parser->getOutput()->addModules( 'ext.agrinovateur' );
+		$parser->getOutput()->addModules( ['ext.agrinovateur'] );
 
 		if (empty($GLOBALS['wgAgrinovateurToken']))
 		{
